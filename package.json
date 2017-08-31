@@ -12,9 +12,8 @@
     "zombie": "^5.0.5"
   },
   "scripts": {
-    // "posttest": "rm -rf ../portfolio-page",
     "serve": "node ./test/server.js",
-    "test": "mocha ./test/portfolio.spec.js",
+    "test": "mocha ./test/wrapup.spec.js",
     "start": "concurrently --kill-others \"npm run serve\" \"npm test\""
   }
 }
