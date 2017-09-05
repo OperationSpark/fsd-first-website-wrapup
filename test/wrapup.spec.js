@@ -47,7 +47,6 @@ describe('Week 3 Wrap Up', function(){
     
     for (var element in elements) {
       // get start and end index for each style block within portfolio.html <style> </style>
-      
       var addElementStyle = function (styleMap, html) {
         startIndex = html.indexOf(element); 
         styleString = html.substring(startIndex);
@@ -71,19 +70,23 @@ describe('Week 3 Wrap Up', function(){
         html = html.substring(0, startIndex) + html.substring(endIndex);
       };
 
-      addElementStyle(indexElementStyleMap, indexStyleHTML);
-      addElementStyle(portfolioElementStyleMap, portfolioStyleHTML);
+      if (indexStyleHTML.includes(element) && portfolioStyleHTML.includes(element)) {
+        addElementStyle(indexElementStyleMap, indexStyleHTML);
+        addElementStyle(portfolioElementStyleMap, portfolioStyleHTML);
+      }
     };
     
     var indexValue, portfolioValue;
     for (var element in elements) {
-      elements[element].forEach(function(property){
-        indexValue = indexElementStyleMap[element][property];
-        portfolioValue = portfolioElementStyleMap[element][property];
-        assert.equal(indexValue, portfolioValue, 
-          "Index " + element + " has style: " + property + ": " + indexValue + "\n" + 
-          "Portfolio " + element + " has style: " + property + ": " + portfolioValue + "\n");
-      });
+      if (indexStyleHTML.includes(element) && portfolioStyleHTML.includes(element)) {
+        elements[element].forEach(function(property){
+          indexValue = indexElementStyleMap[element][property];
+          portfolioValue = portfolioElementStyleMap[element][property];
+          assert.equal(indexValue, portfolioValue, 
+            "Index " + element + " has style: " + property + ": " + indexValue + "\n" + 
+            "Portfolio " + element + " has style: " + property + ": " + portfolioValue + "\n");
+        });
+      }
     }
     
     done();
